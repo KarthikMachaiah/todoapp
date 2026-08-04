@@ -6,14 +6,17 @@
 ![MvRx](https://img.shields.io/badge/Architecture-Airbnb_Mavericks_MvRx_3.0-FF5A5F?style=for-the-badge&logo=airbnb&logoColor=white)
 ![Material3](https://img.shields.io/badge/Design-Material_3_Glassmorphism-673AB7?style=for-the-badge&logo=materialdesign&logoColor=white)
 
-A modern, high-performance, pure **Jetpack Compose** Android application built with **Airbnb Mavericks (MvRx)** architecture framework, Kotlin Coroutines, and a sleek Dark Glassmorphism Material3 design system.
+A modern, high-performance, pure **Jetpack Compose** Android application built with **Airbnb Mavericks (MvRx 3.0)** architecture framework, Kotlin Coroutines, dynamic **Dark & Light Mode**, **Zomato-style motion transitions**, native **SplashScreen API**, and a sleek Material 3 design system.
 
 ---
 
 ## ✨ Features
 
 - ⚡ **Airbnb Mavericks (MvRx) State Management**: Unidirectional state flow with immutable state (`MavericksState`) and reactive state reducers (`MavericksViewModel`).
-- 🎨 **Glassmorphic UI Design System**: Dark theme aesthetic with glowing neon accents, custom typography, dynamic linear progress indicators, and glassmorphic card borders.
+- 🌗 **Dynamic Dark & Light Mode Theme**: Seamless switching between dark glassmorphism and crisp light theme palettes with automatic status bar synchronization.
+- 🎬 **Zomato Motion & Splash Screen**: Signature Zomato-style animated brand splash overlay with pulse scale logo, smooth vertical slide-up exit, and fluid list transitions.
+- 🎨 **Custom Adaptive Launcher Icon**: Custom vector adaptive icon with glowing neon checkmark badge and indigo gradient background.
+- 📱 **Native SplashScreen API**: Integrated `androidx.core:core-splashscreen` (Android 12+ API) for instant cold start splash animations.
 - 🏷️ **Categorization & Filtering**: Filter tasks seamlessly by categories (**Work**, **Personal**, **Shopping**, **Health**, **Finance**).
 - 🚩 **Priority Management**: Color-coded badges for task urgency (**Low**, **Medium**, **High**, **Urgent**).
 - 📊 **Productivity Stats Overview**: Real-time stats card tracking total completed tasks, remaining workload, and completion percentage.
@@ -30,6 +33,8 @@ A modern, high-performance, pure **Jetpack Compose** Android application built w
 | **Language** | Kotlin 2.0 |
 | **UI Toolkit** | Jetpack Compose (Material 3) |
 | **Architecture** | MvRx (Airbnb Mavericks 3.0) |
+| **Theme System** | Dynamic Material 3 Light & Dark Mode |
+| **Splash System** | `androidx.core:core-splashscreen` & Compose Motion |
 | **Async & Flow** | Kotlin Coroutines & `StateFlow` |
 | **Dependency Catalog** | Gradle Version Catalog (`libs.versions.toml`) |
 | **Build System** | Gradle Kotlin DSL (`.gradle.kts`) |
@@ -41,7 +46,7 @@ graph TD
     A[TodoRepository StateFlow] -->|Mavericks execute| B(TodoViewModel)
     B -->|Immutable State Updates| C(TodoState)
     C -->|collectAsState| D[Jetpack Compose UI Screen]
-    D -->|User Action: Add / Toggle / Filter| B
+    D -->|User Action: Add / Toggle / Theme / Filter| B
 ```
 
 ---
@@ -55,15 +60,16 @@ todoapp/
 ├── app/
 │   ├── src/main/
 │   │   ├── AndroidManifest.xml
+│   │   ├── res/                        # Vector launcher icons, Splash theme
 │   │   └── java/com/example/todoapp/
 │   │       ├── TodoApplication.kt      # Initializes Mavericks.initialize(this)
-│   │       ├── MainActivity.kt         # Compose entry point
+│   │       ├── MainActivity.kt         # Compose & SplashScreen entry point
 │   │       ├── model/                  # TodoItem, SubTask, Category, Priority
 │   │       ├── repository/             # TodoRepository (Reactive flow data source)
 │   │       ├── mvrx/                   # TodoState & TodoViewModel (Mavericks MvRx)
 │   │       └── ui/
-│   │           ├── TodoScreen.kt       # Main screen with MvRx state binding
-│   │           ├── theme/              # Color, Type, Theme (Glassmorphic dark UI)
+│   │           ├── TodoScreen.kt       # Main screen with MvRx state & Zomato splash motion
+│   │           ├── theme/              # Color, Type, Theme (Dark & Light Material3 UI)
 │   │           └── components/         # StatsCard, CategoryChipGroup, TodoItemCard, etc.
 ```
 
@@ -89,4 +95,5 @@ todoapp/
 ## 👤 Author
 
 **Karthik Machaiah**
+- Email: [karthikmachaiah@gmail.com](mailto:karthikmachaiah@gmail.com)
 - GitHub: [@KarthikMachaiah](https://github.com/KarthikMachaiah)
