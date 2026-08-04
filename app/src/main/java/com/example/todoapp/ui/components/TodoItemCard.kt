@@ -39,7 +39,7 @@ fun TodoItemCard(
     val priorityColor = getPriorityColor(todo.priority)
 
     val cardBg by animateColorAsState(
-        targetValue = if (todo.isCompleted) SurfaceDark.copy(alpha = 0.6f) else SurfaceDark,
+        targetValue = if (todo.isCompleted) MaterialTheme.colorScheme.surface.copy(alpha = 0.6f) else MaterialTheme.colorScheme.surface,
         label = "bg"
     )
 
@@ -47,7 +47,7 @@ fun TodoItemCard(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(20.dp))
-            .border(1.dp, if (todo.isCompleted) BorderGlass.copy(alpha = 0.1f) else BorderGlass, RoundedCornerShape(20.dp))
+            .border(1.dp, if (todo.isCompleted) MaterialTheme.colorScheme.outline.copy(alpha = 0.2f) else MaterialTheme.colorScheme.outline, RoundedCornerShape(20.dp))
             .clickable { isExpanded = !isExpanded },
         colors = CardDefaults.cardColors(containerColor = cardBg)
     ) {
@@ -67,9 +67,9 @@ fun TodoItemCard(
                         .size(28.dp)
                         .clip(CircleShape)
                         .background(
-                            if (todo.isCompleted) SuccessGreen else SurfaceVariantDark
+                            if (todo.isCompleted) SuccessGreen else MaterialTheme.colorScheme.surfaceVariant
                         )
-                        .border(1.5.dp, if (todo.isCompleted) SuccessGreen else BorderGlass, CircleShape)
+                        .border(1.5.dp, if (todo.isCompleted) SuccessGreen else MaterialTheme.colorScheme.outline, CircleShape)
                 ) {
                     if (todo.isCompleted) {
                         Icon(
@@ -87,7 +87,7 @@ fun TodoItemCard(
                     Text(
                         text = todo.title,
                         style = MaterialTheme.typography.titleLarge.copy(
-                            color = if (todo.isCompleted) Color(0xFF64748B) else Color.White,
+                            color = if (todo.isCompleted) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurface,
                             textDecoration = if (todo.isCompleted) TextDecoration.LineThrough else TextDecoration.None
                         ),
                         maxLines = 1,
@@ -134,7 +134,7 @@ fun TodoItemCard(
                             val doneCount = todo.subtasks.count { it.isCompleted }
                             Text(
                                 text = "$doneCount/${todo.subtasks.size} subtasks",
-                                style = MaterialTheme.typography.labelSmall.copy(color = Color(0xFF94A3B8))
+                                style = MaterialTheme.typography.labelSmall.copy(color = MaterialTheme.colorScheme.onSurfaceVariant)
                             )
                         }
                     }
@@ -144,7 +144,7 @@ fun TodoItemCard(
                     Icon(
                         imageVector = Icons.Default.Edit,
                         contentDescription = "Edit",
-                        tint = Color(0xFF94A3B8),
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.size(18.dp)
                     )
                 }
@@ -169,14 +169,14 @@ fun TodoItemCard(
                     if (todo.description.isNotBlank()) {
                         Text(
                             text = todo.description,
-                            style = MaterialTheme.typography.bodyMedium.copy(color = Color(0xFFCBD5E1)),
+                            style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.onSurfaceVariant),
                             modifier = Modifier.padding(bottom = 8.dp)
                         )
                     }
 
                     if (todo.subtasks.isNotEmpty()) {
-                        Divider(
-                            color = BorderGlass,
+                        HorizontalDivider(
+                            color = MaterialTheme.colorScheme.outline,
                             thickness = 0.5.dp,
                             modifier = Modifier.padding(vertical = 8.dp)
                         )
@@ -202,7 +202,7 @@ fun TodoItemCard(
                                     onCheckedChange = { onToggleSubtask(subtask.id) },
                                     colors = CheckboxDefaults.colors(
                                         checkedColor = PrimaryNeon,
-                                        uncheckedColor = Color(0xFF64748B)
+                                        uncheckedColor = MaterialTheme.colorScheme.onSurfaceVariant
                                     ),
                                     modifier = Modifier.size(24.dp)
                                 )
@@ -210,7 +210,7 @@ fun TodoItemCard(
                                 Text(
                                     text = subtask.title,
                                     style = MaterialTheme.typography.bodyMedium.copy(
-                                        color = if (subtask.isCompleted) Color(0xFF64748B) else Color.White,
+                                        color = if (subtask.isCompleted) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurface,
                                         textDecoration = if (subtask.isCompleted) TextDecoration.LineThrough else TextDecoration.None
                                     )
                                 )

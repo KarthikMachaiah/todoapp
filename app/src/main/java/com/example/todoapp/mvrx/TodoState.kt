@@ -13,7 +13,8 @@ data class TodoState(
     val selectedPriority: Priority? = null,
     val searchQuery: String = "",
     val isAddSheetOpen: Boolean = false,
-    val editingTodo: TodoItem? = null
+    val editingTodo: TodoItem? = null,
+    val isDarkMode: Boolean = true
 ) : MavericksState {
 
     // Derived property for filtered todos

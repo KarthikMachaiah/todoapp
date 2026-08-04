@@ -11,6 +11,8 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
+import androidx.compose.material3.lightColorScheme
+
 private val DarkColorScheme = darkColorScheme(
     primary = PrimaryNeon,
     secondary = SecondaryCyan,
@@ -22,7 +24,23 @@ private val DarkColorScheme = darkColorScheme(
     onSecondary = Color.White,
     onBackground = Color(0xFFF8FAFC),
     onSurface = Color(0xFFF8FAFC),
-    onSurfaceVariant = Color(0xFF94A3B8)
+    onSurfaceVariant = Color(0xFF94A3B8),
+    outline = BorderGlassDark
+)
+
+private val LightColorScheme = lightColorScheme(
+    primary = PrimaryNeon,
+    secondary = SecondaryCyan,
+    tertiary = AccentPurple,
+    background = BackgroundLight,
+    surface = SurfaceLight,
+    surfaceVariant = SurfaceVariantLight,
+    onPrimary = Color.White,
+    onSecondary = Color.White,
+    onBackground = Color(0xFF0F172A),
+    onSurface = Color(0xFF0F172A),
+    onSurfaceVariant = Color(0xFF64748B),
+    outline = BorderGlassLight
 )
 
 @Composable
@@ -30,13 +48,13 @@ fun TodoAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colorScheme = DarkColorScheme
+    val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = BackgroundDark.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = false
+            window.statusBarColor = colorScheme.background.toArgb()
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
         }
     }
 

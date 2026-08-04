@@ -32,8 +32,8 @@ fun StatsCard(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(24.dp))
-            .border(1.dp, BorderGlass, RoundedCornerShape(24.dp)),
-        colors = CardDefaults.cardColors(containerColor = SurfaceDark)
+            .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(24.dp)),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Box(
             modifier = Modifier
@@ -58,11 +58,11 @@ fun StatsCard(
                     Column {
                         Text(
                             text = "Daily Productivity",
-                            style = MaterialTheme.typography.titleLarge.copy(color = Color.White)
+                            style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onSurface)
                         )
                         Text(
                             text = "$completedCount of $totalCount tasks completed",
-                            style = MaterialTheme.typography.bodyMedium.copy(color = Color(0xFF94A3B8))
+                            style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.onSurfaceVariant)
                         )
                     }
                     Surface(
@@ -92,7 +92,7 @@ fun StatsCard(
                         .height(10.dp)
                         .clip(RoundedCornerShape(5.dp)),
                     color = PrimaryNeon,
-                    trackColor = SurfaceVariantDark
+                    trackColor = MaterialTheme.colorScheme.surfaceVariant
                 )
 
                 if (completedCount > 0) {

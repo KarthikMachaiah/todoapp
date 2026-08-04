@@ -22,6 +22,8 @@ import androidx.compose.ui.unit.dp
 import com.example.todoapp.model.Category
 import com.example.todoapp.ui.theme.*
 
+import androidx.compose.material.icons.automirrored.filled.ListAlt
+
 @Composable
 fun CategoryChipGroup(
     selectedCategory: Category,
@@ -42,11 +44,11 @@ fun CategoryChipGroup(
                 modifier = Modifier
                     .clip(RoundedCornerShape(16.dp))
                     .background(
-                        if (isSelected) categoryColor.copy(alpha = 0.25f) else SurfaceVariantDark.copy(alpha = 0.5f)
+                        if (isSelected) categoryColor.copy(alpha = 0.25f) else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
                     )
                     .border(
                         width = 1.dp,
-                        color = if (isSelected) categoryColor else BorderGlass,
+                        color = if (isSelected) categoryColor else MaterialTheme.colorScheme.outline,
                         shape = RoundedCornerShape(16.dp)
                     )
                     .clickable { onCategorySelected(category) }
@@ -59,13 +61,13 @@ fun CategoryChipGroup(
                     Icon(
                         imageVector = icon,
                         contentDescription = category.displayName,
-                        tint = if (isSelected) categoryColor else Color(0xFF94A3B8),
+                        tint = if (isSelected) categoryColor else MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.size(16.dp)
                     )
                     Text(
                         text = category.displayName,
                         style = MaterialTheme.typography.bodyMedium.copy(
-                            color = if (isSelected) Color.White else Color(0xFF94A3B8)
+                            color = if (isSelected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     )
                 }
@@ -87,7 +89,7 @@ fun getCategoryColor(category: Category): Color {
 
 fun getCategoryIcon(category: Category): ImageVector {
     return when (category) {
-        Category.ALL -> Icons.Default.ListAlt
+        Category.ALL -> Icons.AutoMirrored.Filled.ListAlt
         Category.WORK -> Icons.Default.Work
         Category.PERSONAL -> Icons.Default.Person
         Category.SHOPPING -> Icons.Default.ShoppingCart

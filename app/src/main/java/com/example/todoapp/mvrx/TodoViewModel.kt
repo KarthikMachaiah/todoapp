@@ -3,6 +3,7 @@ package com.example.todoapp.mvrx
 import com.airbnb.mvrx.MavericksViewModel
 import com.airbnb.mvrx.MavericksViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
+import com.airbnb.mvrx.withState
 import com.example.todoapp.model.Category
 import com.example.todoapp.model.Priority
 import com.example.todoapp.model.TodoItem
@@ -38,6 +39,10 @@ class TodoViewModel(
         setState { copy(isAddSheetOpen = false, editingTodo = null) }
     }
 
+    fun toggleDarkMode() {
+        setState { copy(isDarkMode = !isDarkMode) }
+    }
+
     fun toggleTodo(id: String) {
         repository.toggleTodo(id)
     }
@@ -59,16 +64,18 @@ class TodoViewModel(
     ) {
         if (title.isBlank()) return
         if (existingId != null) {
-            val currentList = currentState.todosAsync() ?: emptyList()
-            val existing = currentList.find { it.id == existingId }
-            if (existing != null) {
-                val updated = existing.copy(
-                    title = title.trim(),
-                    description = description.trim(),
-                    category = category,
-                    priority = priority
-                )
-                repository.updateTodo(updated)
+            withState(this) { state ->
+                val currentList = state.todosAsync() ?: emptyList()
+                val existing = currentList.find { it.id == existingId }
+                if (existing != null) {
+                    val updated = existing.copy(
+                        title = title.trim(),
+                        description = description.trim(),
+                        category = category,
+                        priority = priority
+                    )
+                    repository.updateTodo(updated)
+                }
             }
         } else {
             val newTodo = TodoItem(

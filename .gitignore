@@ -6,7 +6,9 @@
 /.idea/modules.xml
 /.idea/workspace.xml
 /build
-/captures
+app/build/
+.idea/
+captures
 .externalNativeBuild
 .cxx
 local.properties

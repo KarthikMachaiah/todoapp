@@ -34,7 +34,7 @@ fun AddEditTodoBottomSheet(
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
-        containerColor = SurfaceDark,
+        containerColor = MaterialTheme.colorScheme.surface,
         scrimColor = Color.Black.copy(alpha = 0.6f)
     ) {
         Column(
@@ -45,7 +45,7 @@ fun AddEditTodoBottomSheet(
         ) {
             Text(
                 text = if (editingTodo != null) "Edit Task" else "Create New Task",
-                style = MaterialTheme.typography.headlineMedium.copy(color = Color.White)
+                style = MaterialTheme.typography.headlineMedium.copy(color = MaterialTheme.colorScheme.onSurface)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -59,11 +59,11 @@ fun AddEditTodoBottomSheet(
                 modifier = Modifier.fillMaxWidth(),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = PrimaryNeon,
-                    unfocusedBorderColor = BorderGlass,
+                    unfocusedBorderColor = MaterialTheme.colorScheme.outline,
                     focusedLabelColor = PrimaryNeon,
-                    unfocusedLabelColor = Color(0xFF94A3B8),
-                    focusedTextColor = Color.White,
-                    unfocusedTextColor = Color.White
+                    unfocusedLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                    unfocusedTextColor = MaterialTheme.colorScheme.onSurface
                 ),
                 shape = RoundedCornerShape(14.dp),
                 singleLine = true
@@ -80,11 +80,11 @@ fun AddEditTodoBottomSheet(
                 modifier = Modifier.fillMaxWidth(),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = PrimaryNeon,
-                    unfocusedBorderColor = BorderGlass,
+                    unfocusedBorderColor = MaterialTheme.colorScheme.outline,
                     focusedLabelColor = PrimaryNeon,
-                    unfocusedLabelColor = Color(0xFF94A3B8),
-                    focusedTextColor = Color.White,
-                    unfocusedTextColor = Color.White
+                    unfocusedLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                    unfocusedTextColor = MaterialTheme.colorScheme.onSurface
                 ),
                 shape = RoundedCornerShape(14.dp),
                 maxLines = 3
@@ -95,7 +95,7 @@ fun AddEditTodoBottomSheet(
             // Category Selection
             Text(
                 text = "Select Category",
-                style = MaterialTheme.typography.labelSmall.copy(color = Color(0xFF94A3B8), fontWeight = FontWeight.Bold)
+                style = MaterialTheme.typography.labelSmall.copy(color = MaterialTheme.colorScheme.onSurfaceVariant, fontWeight = FontWeight.Bold)
             )
             Spacer(modifier = Modifier.height(8.dp))
             LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -105,15 +105,15 @@ fun AddEditTodoBottomSheet(
                     Box(
                         modifier = Modifier
                             .clip(RoundedCornerShape(12.dp))
-                            .background(if (isSelected) catColor.copy(alpha = 0.25f) else SurfaceVariantDark)
-                            .border(1.dp, if (isSelected) catColor else BorderGlass, RoundedCornerShape(12.dp))
+                            .background(if (isSelected) catColor.copy(alpha = 0.25f) else MaterialTheme.colorScheme.surfaceVariant)
+                            .border(1.dp, if (isSelected) catColor else MaterialTheme.colorScheme.outline, RoundedCornerShape(12.dp))
                             .clickable { selectedCategory = category }
                             .padding(horizontal = 14.dp, vertical = 8.dp)
                     ) {
                         Text(
                             text = category.displayName,
                             style = MaterialTheme.typography.bodyMedium.copy(
-                                color = if (isSelected) Color.White else Color(0xFF94A3B8),
+                                color = if (isSelected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant,
                                 fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
                             )
                         )
@@ -126,7 +126,7 @@ fun AddEditTodoBottomSheet(
             // Priority Selection
             Text(
                 text = "Select Priority",
-                style = MaterialTheme.typography.labelSmall.copy(color = Color(0xFF94A3B8), fontWeight = FontWeight.Bold)
+                style = MaterialTheme.typography.labelSmall.copy(color = MaterialTheme.colorScheme.onSurfaceVariant, fontWeight = FontWeight.Bold)
             )
             Spacer(modifier = Modifier.height(8.dp))
             Row(
@@ -140,8 +140,8 @@ fun AddEditTodoBottomSheet(
                         modifier = Modifier
                             .weight(1f)
                             .clip(RoundedCornerShape(12.dp))
-                            .background(if (isSelected) prioColor.copy(alpha = 0.25f) else SurfaceVariantDark)
-                            .border(1.dp, if (isSelected) prioColor else BorderGlass, RoundedCornerShape(12.dp))
+                            .background(if (isSelected) prioColor.copy(alpha = 0.25f) else MaterialTheme.colorScheme.surfaceVariant)
+                            .border(1.dp, if (isSelected) prioColor else MaterialTheme.colorScheme.outline, RoundedCornerShape(12.dp))
                             .clickable { selectedPriority = priority }
                             .padding(vertical = 10.dp),
                         contentAlignment = Alignment.Center
@@ -149,7 +149,7 @@ fun AddEditTodoBottomSheet(
                         Text(
                             text = priority.label,
                             style = MaterialTheme.typography.labelSmall.copy(
-                                color = if (isSelected) prioColor else Color(0xFF94A3B8),
+                                color = if (isSelected) prioColor else MaterialTheme.colorScheme.onSurfaceVariant,
                                 fontWeight = FontWeight.Bold
                             )
                         )
