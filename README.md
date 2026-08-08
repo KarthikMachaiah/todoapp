@@ -14,7 +14,7 @@ A modern, high-performance, pure **Jetpack Compose** Android application built w
 
 - ⚡ **Airbnb Mavericks (MvRx) State Management**: Unidirectional state flow with immutable state (`MavericksState`) and reactive state reducers (`MavericksViewModel`).
 - 🌗 **Dynamic Dark & Light Mode Theme**: Seamless switching between dark glassmorphism and crisp light theme palettes with automatic status bar synchronization.
-- 🎬 **Zomato Motion & Splash Screen**: Signature Zomato-style animated brand splash overlay with pulse scale logo, smooth vertical slide-up exit, and fluid list transitions.
+- 🎬 ** Motion & Splash Screen**: Signature style animated brand splash overlay with pulse scale logo, smooth vertical slide-up exit, and fluid list transitions.
 - 🎨 **Custom Adaptive Launcher Icon**: Custom vector adaptive icon with glowing neon checkmark badge and indigo gradient background.
 - 📱 **Native SplashScreen API**: Integrated `androidx.core:core-splashscreen` (Android 12+ API) for instant cold start splash animations.
 - 🏷️ **Categorization & Filtering**: Filter tasks seamlessly by categories (**Work**, **Personal**, **Shopping**, **Health**, **Finance**).
