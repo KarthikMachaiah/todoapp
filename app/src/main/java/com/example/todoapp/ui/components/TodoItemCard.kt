@@ -130,6 +130,37 @@ fun TodoItemCard(
                             )
                         }
 
+                        if (todo.dueDateMillis != null) {
+                            val formattedDate = java.time.Instant.ofEpochMilli(todo.dueDateMillis)
+                                .atZone(java.time.ZoneId.systemDefault())
+                                .toLocalDate()
+                                .format(java.time.format.DateTimeFormatter.ofPattern("MMM dd"))
+                            Surface(
+                                color = MaterialTheme.colorScheme.surfaceVariant,
+                                shape = RoundedCornerShape(8.dp)
+                            ) {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.CalendarToday,
+                                        contentDescription = "Due Date",
+                                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        modifier = Modifier.size(10.dp)
+                                    )
+                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Text(
+                                        text = formattedDate,
+                                        style = MaterialTheme.typography.labelSmall.copy(
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                            fontWeight = FontWeight.Medium
+                                        )
+                                    )
+                                }
+                            }
+                        }
+
                         if (todo.subtasks.isNotEmpty()) {
                             val doneCount = todo.subtasks.count { it.isCompleted }
                             Text(
