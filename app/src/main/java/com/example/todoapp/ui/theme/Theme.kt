@@ -1,6 +1,9 @@
 package com.example.todoapp.ui.theme
 
 import android.app.Activity
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
@@ -48,7 +51,29 @@ fun TodoAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
+    val targetColorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
+    val animatedBackground by animateColorAsState(
+        targetValue = targetColorScheme.background,
+        animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing),
+        label = "backgroundColor"
+    )
+    val animatedSurface by animateColorAsState(
+        targetValue = targetColorScheme.surface,
+        animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing),
+        label = "surfaceColor"
+    )
+    val animatedSurfaceVariant by animateColorAsState(
+        targetValue = targetColorScheme.surfaceVariant,
+        animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing),
+        label = "surfaceVariantColor"
+    )
+
+    val colorScheme = targetColorScheme.copy(
+        background = animatedBackground,
+        surface = animatedSurface,
+        surfaceVariant = animatedSurfaceVariant
+    )
+
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {

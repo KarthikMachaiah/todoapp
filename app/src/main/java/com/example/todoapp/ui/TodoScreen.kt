@@ -97,189 +97,194 @@ fun TodoScreen(
                             )
                         }
 
-                        IconButton(onClick = { viewModel.toggleDarkMode() }) {
-                            Icon(
-                                imageVector = if (state.isDarkMode) Icons.Default.LightMode else Icons.Default.DarkMode,
-                                contentDescription = "Toggle Theme",
-                                tint = MaterialTheme.colorScheme.onBackground
-                            )
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    // Search Bar
-                    OutlinedTextField(
-                        value = state.searchQuery,
-                        onValueChange = { viewModel.setSearchQuery(it) },
-                        placeholder = { Text("Search tasks...", color = MaterialTheme.colorScheme.onSurfaceVariant) },
-                        leadingIcon = {
-                            Icon(
-                                imageVector = Icons.Default.Search,
-                                contentDescription = "Search",
-                                tint = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        },
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(16.dp),
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedContainerColor = MaterialTheme.colorScheme.surface,
-                            unfocusedContainerColor = MaterialTheme.colorScheme.surface,
-                            focusedBorderColor = PrimaryNeon,
-                            unfocusedBorderColor = MaterialTheme.colorScheme.outline,
-                            focusedTextColor = MaterialTheme.colorScheme.onSurface,
-                            unfocusedTextColor = MaterialTheme.colorScheme.onSurface
-                        ),
-                        singleLine = true
-                    )
-
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    // Productivity Stats Overview Card
-                    StatsCard(
-                        totalCount = state.totalCount,
-                        completedCount = state.completedCount,
-                        percentage = state.completionPercentage,
-                        onClearCompleted = { viewModel.clearCompleted() }
-                    )
-
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    // Category Chips
-                    CategoryChipGroup(
-                        selectedCategory = state.selectedCategory,
-                        onCategorySelected = { viewModel.setSelectedCategory(it) }
-                    )
-
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    // Todo List Section with Zomato-style Animated Transitions
-                    val todos = state.filteredTodos
-                    if (todos.isEmpty()) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .weight(1f),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                Text(
-                                    text = "No tasks found",
-                                    style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                )
-                                Text(
-                                    text = "Tap + to add a new task",
-                                    style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f))
-                                )
-                            }
-                        }
-                    } else {
-                        LazyColumn(
-                            modifier = Modifier.weight(1f),
-                            verticalArrangement = Arrangement.spacedBy(12.dp),
-                            contentPadding = PaddingValues(bottom = 80.dp)
-                        ) {
-                            items(todos, key = { it.id }) { todo ->
-                                TodoItemCard(
-                                    todo = todo,
-                                    onToggleCompleted = { viewModel.toggleTodo(todo.id) },
-                                    onDelete = { viewModel.deleteTodo(todo.id) },
-                                    onEdit = { viewModel.openAddSheet(todo) },
-                                    onToggleSubtask = { subtaskId -> viewModel.toggleSubtask(todo.id, subtaskId) }
-                                )
-                            }
-                        }
+                    IconButton(onClick = { viewModel.toggleDarkMode() }) {
+                        val iconScale by animateFloatAsState(
+                            targetValue = if (state.isDarkMode) 1.2f else 1.0f,
+                            animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy),
+                            label = "iconScale"
+                        )
+                        Icon(
+                            imageVector = if (state.isDarkMode) Icons.Default.LightMode else Icons.Default.DarkMode,
+                            contentDescription = "Toggle Theme",
+                            tint = MaterialTheme.colorScheme.onBackground,
+                            modifier = Modifier.scale(iconScale)
+                        )
                     }
                 }
 
-                // Add / Edit Modal Bottom Sheet
-                if (state.isAddSheetOpen) {
-                    AddEditTodoBottomSheet(
-                        editingTodo = state.editingTodo,
-                        onSave = { title, description, category, priority, existingId ->
-                            viewModel.saveTodo(title, description, category, priority, existingId)
-                        },
-                        onDismiss = { viewModel.closeAddSheet() }
-                    )
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Search Bar
+                OutlinedTextField(
+                    value = state.searchQuery,
+                    onValueChange = { viewModel.setSearchQuery(it) },
+                    placeholder = { Text("Search tasks...", color = MaterialTheme.colorScheme.onSurfaceVariant) },
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = "Search",
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = MaterialTheme.colorScheme.surface,
+                        unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+                        focusedBorderColor = PrimaryNeon,
+                        unfocusedBorderColor = MaterialTheme.colorScheme.outline,
+                        focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                        unfocusedTextColor = MaterialTheme.colorScheme.onSurface
+                    ),
+                    singleLine = true
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Productivity Stats Overview Card
+                StatsCard(
+                    totalCount = state.totalCount,
+                    completedCount = state.completedCount,
+                    percentage = state.completionPercentage,
+                    onClearCompleted = { viewModel.clearCompleted() }
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Category Chips
+                CategoryChipGroup(
+                    selectedCategory = state.selectedCategory,
+                    onCategorySelected = { viewModel.setSelectedCategory(it) }
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Todo List Section with Zomato-style Animated Transitions
+                val todos = state.filteredTodos
+                if (todos.isEmpty()) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Text(
+                                text = "No tasks found",
+                                style = MaterialTheme.typography.titleLarge.copy(color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            )
+                            Text(
+                                text = "Tap + to add a new task",
+                                style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f))
+                            )
+                        }
+                    }
+                } else {
+                    LazyColumn(
+                        modifier = Modifier.weight(1f),
+                        verticalArrangement = Arrangement.spacedBy(12.dp),
+                        contentPadding = PaddingValues(bottom = 80.dp)
+                    ) {
+                        items(todos, key = { it.id }) { todo ->
+                            TodoItemCard(
+                                todo = todo,
+                                onToggleCompleted = { viewModel.toggleTodo(todo.id) },
+                                onDelete = { viewModel.deleteTodo(todo.id) },
+                                onEdit = { viewModel.openAddSheet(todo) },
+                                onToggleSubtask = { subtaskId -> viewModel.toggleSubtask(todo.id, subtaskId) }
+                            )
+                        }
+                    }
                 }
             }
 
-            // Zomato-Style Animated Splash Screen Overlay
-            AnimatedVisibility(
-                visible = isSplashVisible,
-                exit = slideOutVertically(
-                    targetOffsetY = { -it },
-                    animationSpec = tween(durationMillis = 600, easing = FastOutSlowInEasing)
-                ) + fadeOut(animationSpec = tween(durationMillis = 600))
-            ) {
-                val infiniteTransition = rememberInfiniteTransition(label = "pulse")
-                val pulseScale by infiniteTransition.animateFloat(
-                    initialValue = 0.92f,
-                    targetValue = 1.08f,
-                    animationSpec = infiniteRepeatable(
-                        animation = tween(600, easing = FastOutSlowInEasing),
-                        repeatMode = RepeatMode.Reverse
-                    ),
-                    label = "scale"
+            // Add / Edit Modal Bottom Sheet
+            if (state.isAddSheetOpen) {
+                AddEditTodoBottomSheet(
+                    editingTodo = state.editingTodo,
+                    onSave = { title, description, category, priority, existingId ->
+                        viewModel.saveTodo(title, description, category, priority, existingId)
+                    },
+                    onDismiss = { viewModel.closeAddSheet() }
                 )
+            }
+        }
 
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(
-                            Brush.verticalGradient(
-                                colors = listOf(
-                                    BackgroundDark,
-                                    Color(0xFF1E1B4B),
-                                    BackgroundDark
-                                )
+        // Zomato-Style Animated Splash Screen Overlay
+        AnimatedVisibility(
+            visible = isSplashVisible,
+            exit = slideOutVertically(
+                targetOffsetY = { -it },
+                animationSpec = tween(durationMillis = 600, easing = FastOutSlowInEasing)
+            ) + fadeOut(animationSpec = tween(durationMillis = 600))
+        ) {
+            val infiniteTransition = rememberInfiniteTransition(label = "pulse")
+            val pulseScale by infiniteTransition.animateFloat(
+                initialValue = 0.92f,
+                targetValue = 1.08f,
+                animationSpec = infiniteRepeatable(
+                    animation = tween(600, easing = FastOutSlowInEasing),
+                    repeatMode = RepeatMode.Reverse
+                ),
+                label = "scale"
+            )
+
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(
+                                BackgroundDark,
+                                Color(0xFF1E1B4B),
+                                BackgroundDark
                             )
-                        ),
-                    contentAlignment = Alignment.Center
+                        )
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
                 ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center
+                    Surface(
+                        shape = CircleShape,
+                        color = PrimaryNeon.copy(alpha = 0.2f),
+                        modifier = Modifier
+                            .size(110.dp)
+                            .scale(pulseScale)
                     ) {
-                        Surface(
-                            shape = CircleShape,
-                            color = PrimaryNeon.copy(alpha = 0.2f),
-                            modifier = Modifier
-                                .size(110.dp)
-                                .scale(pulseScale)
-                        ) {
-                            Box(contentAlignment = Alignment.Center) {
-                                Icon(
-                                    imageVector = Icons.Default.CheckCircle,
-                                    contentDescription = "Logo",
-                                    tint = PrimaryNeon,
-                                    modifier = Modifier.size(64.dp)
-                                )
-                            }
+                        Box(contentAlignment = Alignment.Center) {
+                            Icon(
+                                imageVector = Icons.Default.CheckCircle,
+                                contentDescription = "Logo",
+                                tint = PrimaryNeon,
+                                modifier = Modifier.size(64.dp)
+                            )
                         }
-                        Spacer(modifier = Modifier.height(24.dp))
-                        Text(
-                            text = "MvRx Todo",
-                            style = MaterialTheme.typography.headlineLarge.copy(
-                                color = Color.White,
-                                fontWeight = FontWeight.ExtraBold,
-                                letterSpacing = 1.sp
-                            )
-                        )
-                        Text(
-                            text = "Productivity Flow • Zomato Design Motion",
-                            style = MaterialTheme.typography.bodyMedium.copy(
-                                color = SecondaryCyan,
-                                fontWeight = FontWeight.Medium
-                            )
-                        )
-                        Spacer(modifier = Modifier.height(32.dp))
-                        CircularProgressIndicator(
-                            color = PrimaryNeon,
-                            strokeWidth = 3.dp,
-                            modifier = Modifier.size(28.dp)
-                        )
                     }
+                    Spacer(modifier = Modifier.height(24.dp))
+                    Text(
+                        text = "MvRx Todo",
+                        style = MaterialTheme.typography.headlineLarge.copy(
+                            color = Color.White,
+                            fontWeight = FontWeight.ExtraBold,
+                            letterSpacing = 1.sp
+                        )
+                    )
+                    Text(
+                        text = "Productivity Flow • Zomato Design Motion",
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            color = SecondaryCyan,
+                            fontWeight = FontWeight.Medium
+                        )
+                    )
+                    Spacer(modifier = Modifier.height(32.dp))
+                    CircularProgressIndicator(
+                        color = PrimaryNeon,
+                        strokeWidth = 3.dp,
+                        modifier = Modifier.size(28.dp)
+                    )
                 }
             }
         }
