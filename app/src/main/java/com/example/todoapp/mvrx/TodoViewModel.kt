@@ -23,6 +23,10 @@ class TodoViewModel(
         setState { copy(selectedCategory = category) }
     }
 
+    fun setSelectedDate(date: java.time.LocalDate) {
+        setState { copy(selectedDate = date) }
+    }
+
     fun setSelectedPriority(priority: Priority?) {
         setState { copy(selectedPriority = priority) }
     }

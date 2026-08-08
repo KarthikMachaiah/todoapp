@@ -7,10 +7,15 @@ import com.example.todoapp.model.Category
 import com.example.todoapp.model.Priority
 import com.example.todoapp.model.TodoItem
 
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
+
 data class TodoState(
     val todosAsync: Async<List<TodoItem>> = Uninitialized,
     val selectedCategory: Category = Category.ALL,
     val selectedPriority: Priority? = null,
+    val selectedDate: LocalDate = LocalDate.now(),
     val searchQuery: String = "",
     val isAddSheetOpen: Boolean = false,
     val editingTodo: TodoItem? = null,
@@ -27,7 +32,17 @@ data class TodoState(
                 val matchesSearch = searchQuery.isBlank() ||
                         todo.title.contains(searchQuery, ignoreCase = true) ||
                         todo.description.contains(searchQuery, ignoreCase = true)
-                matchesCategory && matchesPriority && matchesSearch
+                
+                val matchesDate = if (todo.dueDateMillis != null) {
+                    val todoDate = Instant.ofEpochMilli(todo.dueDateMillis)
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate()
+                    todoDate == selectedDate
+                } else {
+                    true // Show all tasks if date filter is reset or unset
+                }
+
+                matchesCategory && matchesPriority && matchesSearch && matchesDate
             }
         }
 

@@ -139,6 +139,14 @@ fun TodoScreen(
 
                     Spacer(modifier = Modifier.height(16.dp))
 
+                    // District / Playo Style Swipeable Weekly Date Strip
+                    WeeklyDateStrip(
+                        selectedDate = state.selectedDate,
+                        onDateSelected = { viewModel.setSelectedDate(it) }
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
                     // Productivity Stats Overview Card
                     StatsCard(
                         totalCount = state.totalCount,
