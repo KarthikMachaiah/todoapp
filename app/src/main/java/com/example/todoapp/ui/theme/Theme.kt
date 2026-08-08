@@ -1,5 +1,6 @@
 package com.example.todoapp.ui.theme
 
+// Material 3 Custom App Color Palette and Animated Theme System
 import android.app.Activity
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.FastOutSlowInEasing
