@@ -14,7 +14,9 @@ import com.example.todoapp.ui.theme.TodoAppTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
-        super.onCreate(savedInstanceState)
+        super.
+
+        onCreate(savedInstanceState)
         setContent {
 
             TodoAppTheme {
