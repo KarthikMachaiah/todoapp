@@ -12,9 +12,10 @@ A modern, high-performance, pure **Jetpack Compose** Android application built w
 
 ## ✨ Features
 
+- 📅 **Swipeable Weekly Date Strip**: Horizontal pager component for intuitive date filtering with a quick **"Today"** reset button and week navigation.
 - ⚡ **Airbnb Mavericks (MvRx) State Management**: Unidirectional state flow with immutable state (`MavericksState`) and reactive state reducers (`MavericksViewModel`).
-- 🌗 **Dynamic Dark & Light Mode Theme**: Seamless switching between dark glassmorphism and crisp light theme palettes with automatic status bar synchronization.
-- 🎬 ** Motion & Splash Screen**: Signature style animated brand splash overlay with pulse scale logo, smooth vertical slide-up exit, and fluid list transitions.
+- 🌗 **Dynamic Dark & Light Mode Theme**: Seamless color wash transitions between dark glassmorphism and light theme palettes with automatic status bar synchronization.
+- 🎬 **Animated Splash Screen**: Brand splash overlay with pulse scale logo, smooth vertical slide-up exit, and fluid list transitions.
 - 🎨 **Custom Adaptive Launcher Icon**: Custom vector adaptive icon with glowing neon checkmark badge and indigo gradient background.
 - 📱 **Native SplashScreen API**: Integrated `androidx.core:core-splashscreen` (Android 12+ API) for instant cold start splash animations.
 - 🏷️ **Categorization & Filtering**: Filter tasks seamlessly by categories (**Work**, **Personal**, **Shopping**, **Health**, **Finance**).
@@ -68,9 +69,9 @@ todoapp/
 │   │       ├── repository/             # TodoRepository (Reactive flow data source)
 │   │       ├── mvrx/                   # TodoState & TodoViewModel (Mavericks MvRx)
 │   │       └── ui/
-│   │           ├── TodoScreen.kt       # Main screen with MvRx state & Zomato splash motion
+│   │           ├── TodoScreen.kt       # Main screen with MvRx state
 │   │           ├── theme/              # Color, Type, Theme (Dark & Light Material3 UI)
-│   │           └── components/         # StatsCard, CategoryChipGroup, TodoItemCard, etc.
+│   │           └── components/         # WeeklyDateStrip, StatsCard, CategoryChipGroup, etc.
 ```
 
 ---

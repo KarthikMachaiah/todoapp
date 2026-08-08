@@ -165,7 +165,7 @@ fun TodoScreen(
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // Todo List Section with Zomato-style Animated Transitions
+                    // Todo List Section with Animated Transitions
                     val todos = state.filteredTodos
                     if (todos.isEmpty()) {
                         Box(
@@ -216,7 +216,7 @@ fun TodoScreen(
                 )
             }
 
-            // Zomato-Style Animated Splash Screen Overlay
+            // Animated Splash Screen Overlay
             AnimatedVisibility(
                 visible = isSplashVisible,
                 exit = slideOutVertically(
@@ -279,7 +279,7 @@ fun TodoScreen(
                             )
                         )
                         Text(
-                            text = "Productivity Flow • Zomato Design Motion",
+                            text = "Productivity Flow • Fluid Design Motion",
                             style = MaterialTheme.typography.bodyMedium.copy(
                                 color = SecondaryCyan,
                                 fontWeight = FontWeight.Medium
