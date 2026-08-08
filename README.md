@@ -76,7 +76,7 @@ todoapp/
 
 ---
 
-## 🚀 Getting Started
+##🚀Getting Started
 
 ### Prerequisites
 - **Android Studio** Ladybug or newer
