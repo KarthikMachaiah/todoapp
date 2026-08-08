@@ -6,7 +6,7 @@
 ![MvRx](https://img.shields.io/badge/Architecture-Airbnb_Mavericks_MvRx_3.0-FF5A5F?style=for-the-badge&logo=airbnb&logoColor=white)
 ![Material3](https://img.shields.io/badge/Design-Material_3_Glassmorphism-673AB7?style=for-the-badge&logo=materialdesign&logoColor=white)
 
-A modern, high-performance, pure **Jetpack Compose** Android application built with **Airbnb Mavericks (MvRx 3.0)** architecture framework, Kotlin Coroutines, dynamic **Dark & Light Mode**, **Zomato-style motion transitions**, native **SplashScreen API**, and a sleek Material 3 design system.
+A modern, high-performance, pure **Jetpack Compose** Android application built with **Airbnb Mavericks (MvRx 3.0)** architecture framework, Kotlin Coroutines, dynamic **Dark & Light Mode**, native **SplashScreen API**, and a sleek Material 3 design system.
 
 ---
 
